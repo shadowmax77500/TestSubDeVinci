@@ -15,7 +15,14 @@ struct ContentView: View {
     
     var body: some View {
         if isConnected {
-            Text("Conecter")
+            Text("Bonjour \(viewModel.pseudo)")
+            NavigationStack {
+                NavigationLink("Question", destination: QuestionView())
+            }
+            
+            Button("Deconnexion") {
+                isConnected = false
+            }
         } else {
             VStack {
                 
@@ -51,8 +58,11 @@ struct ContentView: View {
                     
                     TextField("Password", text: $viewModel.password)
                     
-                    Button("Connexion") {
+                    Button("Inscription") {
                         viewModel.saveUser(pseudo: viewModel.pseudo, firstname: viewModel.firstname, familyName: viewModel.familyname, password: viewModel.password, isAdmin: viewModel.isAdmin)
+                        if viewModel.Conection(pseudo: viewModel.pseudo, password: viewModel.password) {
+                            isConnected = true
+                        }
                     }
                 }
             }

@@ -25,6 +25,12 @@ class DataController: ObservableObject {
     }
     
     func saveUser(pseudo: String, firstname: String, familyName: String, password: String, isAdmin: Bool) {
+        let allUser = getAllUser()
+        for user in allUser {
+            if user.pseudo == pseudo {
+                return
+            }
+        }
         let registeredUser =  User(context: viewContext)
         registeredUser.id = UUID()
         registeredUser.pseudo = pseudo
@@ -58,13 +64,22 @@ class DataController: ObservableObject {
         }
         
     func Conection(pseudo: String, password: String) -> Bool {
-        var allUser = getAllUser()
+        let allUser = getAllUser()
         for user in allUser {
             if user.pseudo == pseudo && user.password == password {
                 return true
             }
         }
     return false
+    }
+    
+    func saveGrade(pseudo: String, password: String, grade: Int) {
+        let allUser = getAllUser()
+        for user in allUser {
+            if user.pseudo == pseudo && user.password == password {
+                user.grade = Int16(grade)
+            }
+        }
     }
 }
 

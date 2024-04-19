@@ -31,5 +31,9 @@ class ContentViewModel: ObservableObject {
     func Conection(pseudo: String, password: String) -> Bool {
         storageModel.Conection(pseudo: pseudo, password: password)
     }
+    
+    func saveGrade(pseudo: String, password: String, grade: Int) {
+        storageModel.saveGrade(pseudo: pseudo, password: password, grade: grade)
+    }
         
 }
